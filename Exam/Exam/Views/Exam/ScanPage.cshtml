@@ -1,0 +1,25 @@
+﻿@model IEnumerable<string>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <form method="post" action="/exam/save">
+        @foreach (var e in Model)
+        {
+            <input value="@e">
+            <br/>
+        }
+        <input type="submit" value="Сохранить"/>
+    </form>
+</div>
+</body>
+</html>
