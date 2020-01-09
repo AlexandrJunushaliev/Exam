@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Tuple<string, string>>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <table>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>
+                    @e.Item1
+                </td>
+                <td>
+                    @e.Item2
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<string>
+﻿@model Tuple<string,IEnumerable<string>>
 
 @{
     Layout = null;
@@ -13,9 +13,10 @@
 <body>
 <div>
     <form method="post" action="/exam/save">
-        @foreach (var e in Model)
+        @foreach (var e in Model.Item2)
         {
-            <input value="@e">
+
+            <input type="text" name="@(e)" value="@e">
             <br/>
         }
         <input type="submit" value="Сохранить"/>

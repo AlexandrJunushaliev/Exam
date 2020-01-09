@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Schema;
+using Exam.Models;
+using Exam.Views.Exam;
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,12 +46,33 @@ namespace Exam.Controllers
             var t = Task.Run(() => Scan(checkedUrls, deep, url));
             Task.WaitAll(t);
             var distinctedUrls = checkedUrls.Distinct();
-            return View(distinctedUrls);
+            return View(Tuple.Create(url, distinctedUrls));
         }
 
-        public async Task Save(string[] urlsSave)
+        public async Task Save()
         {
-            var a = Request.Form;
+            var a = Request.Form.Keys;
+            Uri uri = new Uri($"{a.FirstOrDefault()}");
+            var m = new UrlModel().AppendToDomain("https://" + uri.Host+"/", a);
+        }
+
+        public async Task<IActionResult> GetByDomain(string domain)
+        {
+            var res = new List<Tuple<string, string>>();
+            var m = new UrlModel();
+            var urls = await m.GetAllUrls(domain);
+            foreach (var url in urls)
+            {
+                var web = new HtmlWeb();
+                var isSuccess = false;
+                var document = web.TryWebLoad(ref isSuccess, domain);
+                if (isSuccess)
+                {
+                    res.Add(Tuple.Create(url.Url, document.DocumentNode.InnerHtml));
+                }
+            }
+
+            return View(res);
         }
 
 
@@ -67,7 +92,7 @@ namespace Exam.Controllers
                     {
                         checkedUrls.AddRange(document.DocumentNode.Descendants("a")
                             .Where(x => x.Attributes.Contains("href")).Select(x => x.Attributes["href"].Value)
-                            .Where(x => !x.Contains("http")).Select(x =>"https://" + web.ResponseUri.Host + x));
+                            .Where(x => !x.Contains("http")).Select(x => "https://" + web.ResponseUri.Host + x));
                     }
                 }
                 else

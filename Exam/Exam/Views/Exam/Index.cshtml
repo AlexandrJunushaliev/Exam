@@ -6,14 +6,17 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <title></title>
 </head>
 <body>
 <div>
-    
+    <text>Введите домент в формате https://...</text>
+    <input id="url"/>
+    <input type="number" id="deep"/>
+    <a href="#" onclick="location.href ='https://localhost:5001/exam/scanpage?url='+document.getElementById('url').value+'&deep='+document.getElementById('deep').value">Искать</a>
+    <a href="#" onclick="location.href ='https://localhost:5001/exam/getbydomain?domain='+document.getElementById('url').value">Посмотреть сохраненное</a>
 </div>
 </body>
 </html>

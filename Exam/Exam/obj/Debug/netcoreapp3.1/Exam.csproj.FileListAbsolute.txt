@@ -37,3 +37,5 @@ C:\Users\bazil\Desktop\Exam\Exam\obj\Debug\netcoreapp3.1\Exam.csproj.CopyComplet
 C:\Users\bazil\Desktop\Exam\Exam\obj\Debug\netcoreapp3.1\Exam.dll
 C:\Users\bazil\Desktop\Exam\Exam\obj\Debug\netcoreapp3.1\Exam.pdb
 C:\Users\bazil\Desktop\Exam\Exam\obj\Debug\netcoreapp3.1\Razor\Views\Exam\ScanPage.cshtml.g.cs
+C:\Users\bazil\Desktop\Exam\Exam\bin\Debug\netcoreapp3.1\Npgsql.dll
+C:\Users\bazil\Desktop\Exam\Exam\obj\Debug\netcoreapp3.1\Razor\Views\Exam\GetByDomain.cshtml.g.cs
